@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import { AppProvider } from "./context/AppContext";
+import ReactQuery from "./components/ReactQuery";
+import AppTheme from "./components/AppTheme";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -25,10 +28,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
+      <body className={`${geistSans.variable} ${geistMono.variable} h-screen w-screen text-black`}>
+
+        <ReactQuery>
+          <AppProvider>
+            <AppTheme title="Belajar ku">{children}</AppTheme>
+          </AppProvider>
+        </ReactQuery>
       </body>
     </html>
   );
